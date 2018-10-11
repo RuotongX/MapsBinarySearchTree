@@ -53,7 +53,7 @@ public class Node<K,V> {
 	public void insert(Node input) {
 		if((int)input.getKey()<(int)this.getKey()) {
 			if(this.left == null) {
-				this.left.setLeft(input);
+				this.setLeft(input);
 				return;
 			} else {
 				this.left.insert(input);
@@ -61,7 +61,7 @@ public class Node<K,V> {
 		}
 		else if((int)input.getKey()>(int)this.getKey()) {
 			if(this.right == null) {
-				this.right.setRight(input);
+				this.setRight(input);
 				return;
 			} else {
 				this.right.insert(input);

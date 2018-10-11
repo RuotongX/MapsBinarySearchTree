@@ -19,7 +19,8 @@ public class BinarySearchTree<K,V> {
 	}
 	public ArrayList getValue(K key) {
 		for(int i = 0;i<elements.size();i++) {
-			if(key == elements.get(i)) {
+			if(key==elements.get(i).getKey()) {
+				System.out.println("hi");
 				return elements.get(i).getValue();
 			}
 		}
@@ -37,13 +38,25 @@ public class BinarySearchTree<K,V> {
 	{
 		if(root==null)
 		{
+//			System.out.println("No element in this tree right now");
 			return;
 		}
 		else
 		{
 			keyset(root.getLeft());
-			System.out.print(root.getKey());
+			System.out.print(root.getKey()+" ");
 			keyset(root.getRight());
+		}
+		System.out.println();
+	}
+	public void entryset(Node root) {
+		if(root == null) {
+//			System.out.println("No element in this tree right now");
+			return;
+		} else {
+			entryset(root.getLeft());
+			System.out.println("Key: "+root.getKey()+" Value: "+root.getValues().toString());
+			entryset(root.getRight());
 		}
 	}
 }
