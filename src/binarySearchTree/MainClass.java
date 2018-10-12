@@ -13,8 +13,9 @@ public class MainClass {
 		System.out.println("Type 1 if you want to get key set");
 		System.out.println("Type 2 if you want to get the values");
 		System.out.println("Type 3 if you want to get the entry set");
-		System.out.println("Type 4 if you want to exit this program");
-		System.out.println("Type 5 if you want to get the height of tree");
+		System.out.println("Type 4 if you want to get the value set");
+		System.out.println("Type 5 if you want to exit this program");
+		System.out.println("Type 6 if you want to get the height of tree");
 		do {
 			System.out.println(
 					"Please input your key and value of any order(format must be like 'key value' if you want to add elements):");
@@ -23,7 +24,7 @@ public class MainClass {
 				if (input.equals("1") || input.equals("2") || input.equals("3")||input.equals("4")||input.equals("5")) {
 					switch (input) {
 					case "1":
-						bst.keyset(bst.root);
+						System.out.println(bst.keyset(bst.root));
 						break;
 					case "2":
 						System.out.println("Please input your key");
@@ -36,12 +37,15 @@ public class MainClass {
 						}
 						break;
 					case "3":
-						bst.entryset(bst.root);
+						System.out.println(bst.entryset(bst.root));
 						break;
 					case "4":
-						conti = false;
+						System.out.println(bst.valueset(bst.root));
 						break;
 					case "5":
+						conti = false;
+						break;
+					case "6":
 						System.out.println("Tree height is "+bst.treeHeight());
 						break;
 					}

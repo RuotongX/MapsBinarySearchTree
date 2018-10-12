@@ -1,7 +1,7 @@
 package binarySearchTree;
 import java.util.ArrayList;
 
-public class Node<K,V> {
+public class Node<K extends Comparable<K>,V> {
 	protected K key;
 	protected ArrayList<V> values = new ArrayList<V>();
 
@@ -21,13 +21,6 @@ public class Node<K,V> {
 		right = null;
 	}
 	
-	public ArrayList getValue() {
-//		String value = "";
-//		for(int i = 0;i<values.size();i++) {
-//			value = value+" "+values.get(i);
-//		}
-		return values;
-	}
 	public K getKey() {
 		return key;
 	}
@@ -79,5 +72,8 @@ public class Node<K,V> {
 		if(this.right!=null) 
 			rheight = this.right.getHight();
 		return 1+Math.max(lheight, rheight);
+	}
+	public String toString() {
+		return "Key: "+this.key+" Value: "+this.values.toString();
 	}
 }

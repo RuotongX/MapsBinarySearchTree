@@ -1,27 +1,29 @@
 package binarySearchTree;
 
 import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Set;
+import java.util.TreeSet;
 
 
-public class BinarySearchTree<K,V> {
-	Node root;
-	ArrayList<Node> elements = new ArrayList<Node>();
+public class BinarySearchTree<K extends Comparable<K>,V> {
+	Node<K, V> root;
+	Set<Node<K, V>> elements = new HashSet<>();
 	
 	public BinarySearchTree(K key, V value){
-		this.root = new Node(key,value);
+		this.root = new Node<>(key,value);
 		elements.add(root);
 	}
 	
 	public void add(K key, V value) {		
-		Node nd = new Node(key,value);
+		Node<K, V> nd = new Node<>(key,value);
 		root.insert(nd);
 		elements.add(nd);
 	}
-	public ArrayList getValue(K key) {
+	public ArrayList<V> getValue(K key) {
 		for(int i = 0;i<elements.size();i++) {
-			if(key==elements.get(i).getKey()) {
-				System.out.println("hi");
-				return elements.get(i).getValue();
+			if(key==((Node<K, V>) elements.toArray()[i]).getKey()) {
+				return ((Node<K, V>) elements.toArray()[i]).getValues();
 			}
 		}
 		System.out.println("This input has not be found");
@@ -34,29 +36,55 @@ public class BinarySearchTree<K,V> {
 		else 
 			return 0;
 	}
-	public void keyset(Node root)//use recursion to print in order Traverse of the tree
+	public Set<K> keyset(Node<K, V> root)
 	{
+		Set<K> keyset =  new HashSet<>();
 		if(root==null)
 		{
-//			System.out.println("No element in this tree right now");
-			return;
+			return null;
 		}
 		else
 		{
-			keyset(root.getLeft());
-			System.out.print(root.getKey()+" ");
-			keyset(root.getRight());
+			for(int i =0;i<elements.size();i++) {
+				if(keyset.contains(((Node<K, V>) elements.toArray()[i]).getKey())) {
+					
+				} else {
+					keyset.add((K) ((Node<K, V>) elements.toArray()[i]).getKey());
+				}
+			}
 		}
-		System.out.println();
+		return keyset;
 	}
-	public void entryset(Node root) {
-		if(root == null) {
-//			System.out.println("No element in this tree right now");
-			return;
-		} else {
-			entryset(root.getLeft());
-			System.out.println("Key: "+root.getKey()+" Value: "+root.getValues().toString());
-			entryset(root.getRight());
+	public Set<V> valueset(Node<K, V> root) {
+		Set<V> valueset = new HashSet<>();
+		if(root==null)
+		{
+			return null;
 		}
+		else
+		{
+			for(int i =0;i<this.keyset(root).size();i++) {
+				valueset.addAll(this.getValue(((K)this.keyset(root).toArray()[i])));
+			}
+		}
+		return valueset;
+	}
+	public Set<Node<K, V>> entryset(Node<K, V> root) {
+		Set<Node<K, V>> entry = new TreeSet<>((node1, node2) -> node1.getKey().compareTo(node2.getKey()));
+		if(root == null) {
+			return null;
+		} else {
+			inorder(root,entry);
+		}
+		return entry;
+	}
+	
+	private void inorder(Node<K, V> root,Set<Node<K, V>> entry) {
+		if(root == null) {
+			return;
+		}
+		inorder(root.getLeft(),entry);
+		entry.add(root);
+		inorder(root.getRight(),entry);
 	}
 }
