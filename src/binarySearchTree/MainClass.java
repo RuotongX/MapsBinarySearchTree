@@ -1,7 +1,11 @@
 package binarySearchTree;
 
 import java.util.Scanner;
-
+/**
+ * This is the main class of the program, it just allow user to select the function.
+ * @author RuotongXu 16935995
+ *
+ */
 public class MainClass {
 	public static void main(String args[]) {
 		int key;
@@ -21,7 +25,7 @@ public class MainClass {
 					"Please input your key and value of any order(format must be like 'key value' if you want to add elements):");
 			input = sc.nextLine();
 			if (!input.contains(" ")) {
-				if (input.equals("1") || input.equals("2") || input.equals("3")||input.equals("4")||input.equals("5")) {
+				if (input.equals("1") || input.equals("2") || input.equals("3")||input.equals("4")||input.equals("5")||input.equals("6")) {
 					switch (input) {
 					case "1":
 						System.out.println(bst.keyset(bst.root));
@@ -54,8 +58,8 @@ public class MainClass {
 					conti = true;
 				}
 			} else {
-				String[] temp = input.split(" ");
-				if (temp[1].contains(" ")) {
+				String[] temp = input.split(" ");// This is used to separate the input String to two String by the space.
+				if (temp[1].contains(" ")) {//if user input more than one space input fail.
 					System.out.println("Input invalid");
 					conti = true;
 				}
